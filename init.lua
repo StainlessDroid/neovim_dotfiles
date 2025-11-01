@@ -1,3 +1,8 @@
+-------------------
+-- NEOVIM CONFIG --
+-- BY: @mapascua --
+-------------------
+
 require("core.keymaps")
 require("core.plugins")
 require("core.plugin_config")
@@ -8,6 +13,15 @@ vim.cmd("set tabstop=4")
 vim.cmd("set shiftwidth=4")
 vim.cmd("let g:user42='mapascua'")
 vim.cmd("let g:mail42='mapascua@student.42malaga.com'")
+
+-- Open Tree-sitter (nvim-tree) in current dir when no args
+vim.api.nvim_create_autocmd("VimEnter", {
+  callback = function()
+    if vim.fn.argc() == 0 then
+      require("nvim-tree.api").tree.open()
+    end
+  end,
+})
 
 -- LSP config ---
 require('mason').setup()
